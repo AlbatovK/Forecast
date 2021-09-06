@@ -31,6 +31,8 @@
             android:layout_height="match_parent"
             android:layout_marginTop="24dp"
             android:gravity="center"
+            android:fontFamily="@font/navigo_regular"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
