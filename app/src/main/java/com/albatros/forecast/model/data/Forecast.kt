@@ -1,7 +1,7 @@
 package com.albatros.forecast.model.data
 
-import com.google.gson.annotations.SerializedName
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
 data class Forecast(
     @SerializedName("date")

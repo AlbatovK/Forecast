@@ -1,8 +1,7 @@
 package com.albatros.forecast
 
-import org.junit.Test
-
 import org.junit.Assert.assertEquals
+import org.junit.Test
 
 class ExampleUnitTest {
 

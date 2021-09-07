@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName
 data class Fact(
     @SerializedName("temp")
     @Expose
-    var temp: Double? = null,
+    var temp: Int? = null,
 
     @SerializedName("feels_like")
     @Expose
-    var feelsLike: Double? = null,
+    var feelsLike: Int? = null,
 
     @SerializedName("icon")
     @Expose

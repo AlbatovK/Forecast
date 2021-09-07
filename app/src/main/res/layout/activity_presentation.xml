@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.PresentationActivity">
+    tools:context=".ui.activity.PresentationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -14,9 +14,9 @@
         android:animateLayoutChanges="false"
         android:background="#4685DA"
         android:elevation="0dp"
-        android:paddingTop="16dp"
         android:fitsSystemWindows="true"
         android:layoutAnimation="@null"
+        android:paddingTop="16dp"
         android:stateListAnimator="@null"
         android:theme="@style/Theme.Forecast.AppBarOverlay">
 
@@ -35,15 +35,58 @@
             app:statusBarScrim="@android:color/transparent"
             app:toolbarId="@+id/toolbar">
 
-            <ImageView
-                android:id="@+id/img_state"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/app_name"
-                android:layout_marginTop="40dp"
-                android:scaleType="fitCenter"
-                android:background="@android:color/transparent"
-                app:layout_collapseMode="pin" />
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp">
+
+                <ImageView
+                    android:id="@+id/img_state"
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    app:layout_collapseMode="pin" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="24dp">
+
+                    <TextView
+                        android:id="@+id/temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/navigo_medium"
+                        android:gravity="center_vertical|center"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="12dp"
+                        android:textSize="46sp"
+                        android:visibility="invisible"
+                        app:layout_collapseMode="pin" />
+
+                    <TextView
+                        android:id="@+id/state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/navigo_regular"
+                        android:gravity="top|center"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="24dp"
+                        android:textSize="20sp"
+                        android:visibility="invisible"
+                        app:layout_collapseMode="pin" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

@@ -14,21 +14,17 @@ const val apiKey = "X-Yandex-API-Key: e5422830-52b1-4b27-9f2a-d18afe05825d"
 
 const val getPath = "/v2/informers"
 
-private fun provideApi(retrofit: Retrofit)
-    = retrofit.create(Api::class.java)
+private fun provideApi(retrofit: Retrofit) = retrofit.create(Api::class.java)
 
-private fun provideRetrofit(factory: GsonConverterFactory)
-   = Retrofit.Builder().let {
+private fun provideRetrofit(factory: GsonConverterFactory) = Retrofit.Builder().let {
     it.baseUrl(baseUrl)
     it.addConverterFactory(factory)
     it.build()
 }
 
-private fun provideGsonFactory(gson: Gson)
-    = GsonConverterFactory.create(gson)
+private fun provideGsonFactory(gson: Gson) = GsonConverterFactory.create(gson)
 
-private fun provideGson()
-    = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
+private fun provideGson() = GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
 
 val appModule = module {
     single { provideApi(get()) }
