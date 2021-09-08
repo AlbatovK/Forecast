@@ -25,3 +25,14 @@ private val descrMap = mapOf(
 fun String.isWeatherDescription() = descrMap.containsKey(this)
 
 fun String.getWeatherDescription(): String = descrMap.getOrDefault(this, descrMap["clear"]!!)
+
+private val daytimeMap = mapOf(
+    "night"   to "Ночь",
+    "morning" to "Утро",
+    "day"     to "День",
+    "evening" to "Вечер",
+)
+
+fun String.isDaytimeDescription() = daytimeMap.containsKey(this)
+
+fun String.getDaytimeDescription(): String = daytimeMap.getOrDefault(this, daytimeMap["day"]!!)

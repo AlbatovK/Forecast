@@ -4,19 +4,17 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import coil.ImageLoader
-import coil.decode.SvgDecoder
-import coil.request.ImageRequest
 import com.albatros.forecast.R
 import com.albatros.forecast.databinding.ActivityPresentationBinding
 import com.albatros.forecast.domain.getWeatherDescription
 import com.albatros.forecast.domain.isWeatherDescription
+import com.albatros.forecast.domain.link
+import com.albatros.forecast.domain.loadSvgInto
 import com.albatros.forecast.model.data.ForecastMain
 import com.albatros.forecast.ui.activity.viewmodel.PresentationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,30 +27,16 @@ class PresentationActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPresentationBinding
 
-    private val link = "https://yastatic.net/weather/i/icons/funky/dark/%s.svg"
-
-    private fun ImageView.loadSvgInto(url: String) {
-        val imageLoader = ImageLoader.Builder(context)
-            .componentRegistry { add(SvgDecoder(context)) }
-            .build()
-        val request = ImageRequest.Builder(context)
-            .crossfade(true)
-            .crossfade(500)
-            .data(url)
-            .target(this)
-            .build()
-        imageLoader.enqueue(request)
-    }
-
     private val onDataLoadedObserver = Observer<ForecastMain> {
         with(binding) {
-            val downloadLink = link.format(it.fact?.icon)
+            val downloadLink = link.format(it.fact?.icon ?: "ovc")
             imgState.loadSvgInto(downloadLink)
             imgState.visibility = View.VISIBLE
             temp.text = getString(R.string.temp_data, it.fact?.temp ?: 0)
             temp.visibility = View.VISIBLE
             val condition = it.fact?.condition ?: getString(R.string.unknown_condition)
-            state.text = if (condition.isWeatherDescription()) condition.getWeatherDescription() else condition
+            state.text =
+                if (condition.isWeatherDescription()) condition.getWeatherDescription() else condition
             state.visibility = View.VISIBLE
         }
     }

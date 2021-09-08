@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.albatros.forecast">
+    package="com.albatros.forecast"
+    android:versionName="1.1">
     <!-- Required for API access -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Required for constraining refresh workers -->

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+
     tools:context=".ui.activity.PresentationActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -77,7 +78,7 @@
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/navigo_regular"
                         android:gravity="top|center"
-                        android:paddingStart="10dp"
+                        android:paddingStart="0dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="24dp"
                         android:textSize="20sp"
