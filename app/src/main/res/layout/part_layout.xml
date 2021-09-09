@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:layout_margin="4dp"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_margin="4dp"
-        android:orientation="vertical"
-        tools:ignore="UselessParent">
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            tools:ignore="UseCompoundDrawables">
-
-            <ImageView
-                android:id="@+id/icon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/app_name"
-                android:scaleType="center"
-                android:textColor="#c7dbf4"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/part_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/navigo_medium"
-                android:paddingTop="8dp"
-                android:textColor="#c7dbf4"
-                android:textSize="20sp"
-                android:visibility="invisible" />
-
-            <TextView
-                android:id="@+id/avg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/navigo_medium"
-                android:paddingTop="8dp"
-                android:textColor="#c7dbf4"
-                android:textSize="32sp"
-                android:gravity="center"
-                android:visibility="invisible" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/temp_min"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_regular"
-            android:textColor="#c7dbf4"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/temp_max"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_regular"
-            android:gravity="center"
-            android:textSize="20sp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="center"
             android:textColor="#c7dbf4"
             android:visibility="invisible" />
 
         <TextView
-            android:id="@+id/feels_like"
-            android:layout_width="match_parent"
+            android:id="@+id/part_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_regular"
+            android:fontFamily="@font/navigo_medium"
+            android:paddingTop="8dp"
             android:textColor="#c7dbf4"
             android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/avg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/navigo_medium"
             android:gravity="center"
+            android:paddingTop="8dp"
+            android:textColor="#c7dbf4"
+            android:textSize="32sp"
             android:visibility="invisible" />
 
     </LinearLayout>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/temp_min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/navigo_regular"
+        android:gravity="center"
+        android:textColor="#c7dbf4"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/temp_max"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/navigo_regular"
+        android:gravity="center"
+        android:textColor="#c7dbf4"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/feels_like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/navigo_regular"
+        android:gravity="center"
+        android:textColor="#c7dbf4"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:alpha="0"
+        android:contentDescription="@string/app_name" />
+
+</LinearLayout>
+
 

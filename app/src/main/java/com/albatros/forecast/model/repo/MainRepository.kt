@@ -5,8 +5,8 @@ import com.albatros.forecast.model.data.ForecastMain
 
 class MainRepository(private val api: Api) {
 
-    suspend fun getForecast(lat: Double = 54.99, lon: Double = 73.36, lang: String = "en_US"): ForecastMain {
-        if (_forecast == null)
+    suspend fun getForecast(lat: Double = 54.99, lon: Double = 73.36, lang: String = "en_US", refresh: Boolean = false): ForecastMain {
+        if (_forecast == null || refresh)
             _forecast = try { api.getForecast(lat, lon, lang) } catch (e: Exception) { ForecastMain() }
         return _forecast!!
     }

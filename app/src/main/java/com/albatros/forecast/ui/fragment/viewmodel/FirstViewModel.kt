@@ -12,9 +12,15 @@ import kotlinx.coroutines.launch
 class FirstViewModel(private val repo: MainRepository) : ViewModel() {
     private val _forecast = MutableLiveData<ForecastMain>().apply {
         viewModelScope.launch(Dispatchers.Main) {
-           value = repo.getForecast()
+            value = repo.getForecast()
         }
     }
 
     val forecast: LiveData<ForecastMain> = _forecast
+
+    fun refreshData() {
+        viewModelScope.launch(Dispatchers.Main) {
+            _forecast.value = repo.getForecast(refresh = true)
+        }
+    }
 }
