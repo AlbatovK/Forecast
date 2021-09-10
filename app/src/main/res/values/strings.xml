@@ -5,5 +5,9 @@
     <string name="min_temp">Минимальная температура %s</string>
     <string name="max_temp">Максимальная температура %s</string>
     <string name="feels_like">Чувствуется как %s</string>
-    <string name="hint">Данные предоставлены Yandex.Weather Api</string>
+    <string name="hint">Данные предоставлены Yandex.weather Api</string>
+    <string name="intro">Прогноз на ближайшее время</string>
+    <string name="wind_speed">Скорость ветра %s м/c</string>
+    <string name="min_max">Мин. / Макс. температура \n%s / %s</string>
+    <string name="pressure_mm">Давление %d мм рт. ст.</string>
 </resources>

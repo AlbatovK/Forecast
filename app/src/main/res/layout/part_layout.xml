@@ -22,7 +22,7 @@
             android:layout_height="100dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/app_name"
-            android:scaleType="center"
+            android:scaleType="centerCrop"
             android:textColor="#c7dbf4"
             android:visibility="invisible" />
 
@@ -30,9 +30,11 @@
             android:id="@+id/part_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/navigo_medium"
+            android:paddingStart="4dp"
+            android:paddingEnd="0dp"
             android:paddingTop="8dp"
             android:textColor="#c7dbf4"
             android:textSize="20sp"
@@ -42,13 +44,13 @@
             android:id="@+id/avg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/navigo_medium"
             android:gravity="center"
             android:paddingTop="8dp"
             android:textColor="#c7dbf4"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:visibility="invisible" />
 
     </LinearLayout>
@@ -65,7 +67,7 @@
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/temp_max"
+        android:id="@+id/pressure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -76,7 +78,7 @@
         android:visibility="invisible" />
 
     <TextView
-        android:id="@+id/feels_like"
+        android:id="@+id/wind_speed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"

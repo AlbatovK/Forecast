@@ -67,7 +67,7 @@
                         android:paddingStart="0dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="12dp"
-                        android:textSize="46sp"
+                        android:textSize="44sp"
                         android:visibility="invisible"
                         app:layout_collapseMode="pin" />
 
@@ -81,7 +81,7 @@
                         android:paddingStart="0dp"
                         android:paddingEnd="20dp"
                         android:paddingBottom="24dp"
-                        android:textSize="24sp"
+                        android:textSize="22sp"
                         android:visibility="invisible"
                         app:layout_collapseMode="pin" />
 

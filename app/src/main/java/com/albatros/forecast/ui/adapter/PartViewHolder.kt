@@ -23,28 +23,29 @@ class PartViewHolder(private val binding: PartLayoutBinding) :
         val context = binding.root.context
         part?.let {
             with(binding) {
-                partName.text = it.partName?.getDaytimeDescription() ?: context.getString(R.string.unknown_condition)
-                icon.loadSvgInto(link.format(it.icon ?: "ovc"))
-                avg.text = context.getString(R.string.temp_data, part.tempAvg?.toInt() ?: 0)
-                (it.tempAvg ?: 0).toString()
-                tempMax.text = context.getString(
-                    R.string.max_temp,
-                    context.getString(R.string.temp_data, it.tempMax?.toInt() ?: 0)
+                partName.text = if (it.partName.isNotEmpty())  it.partName.getDaytimeDescription()
+                else context.getString(R.string.unknown_condition)
+                icon.loadSvgInto(link.format(if (it.icon.isEmpty()) "ovc" else it.icon))
+                avg.text = context.getString(R.string.temp_data, it.tempAvg.toInt())
+                pressure.text = context.getString(
+                    R.string.pressure_mm,
+                    it.pressureMm.toInt()
                 )
                 tempMin.text = context.getString(
-                    R.string.min_temp,
-                    context.getString(R.string.temp_data, it.tempMin?.toInt() ?: 0)
+                    R.string.min_max,
+                    context.getString(R.string.temp_data, it.tempMin.toInt()),
+                    context.getString(R.string.temp_data, it.tempMax.toInt())
                 )
-                feelsLike.text = context.getString(
-                    R.string.feels_like,
-                    context.getString(R.string.temp_data, it.feelsLike?.toInt() ?: 0)
+                windSpeed.text = context.getString(
+                    R.string.wind_speed,
+                    (it.windSpeed).toString()
                 )
                 partName.visibility = View.VISIBLE
                 icon.visibility = View.VISIBLE
                 avg.visibility = View.VISIBLE
                 tempMin.visibility = View.VISIBLE
-                tempMax.visibility = View.VISIBLE
-                feelsLike.visibility = View.VISIBLE
+                pressure.visibility = View.VISIBLE
+                windSpeed.visibility = View.VISIBLE
             }
         }
     }

@@ -17,10 +17,4 @@ class FirstViewModel(private val repo: MainRepository) : ViewModel() {
     }
 
     val forecast: LiveData<ForecastMain> = _forecast
-
-    fun refreshData() {
-        viewModelScope.launch(Dispatchers.Main) {
-            _forecast.value = repo.getForecast(refresh = true)
-        }
-    }
 }

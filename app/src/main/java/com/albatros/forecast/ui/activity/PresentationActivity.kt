@@ -65,6 +65,10 @@ class PresentationActivity : AppCompatActivity() {
         R.id.settings -> {
             true
         }
+        R.id.refresh -> {
+            presentationViewModel.refreshData()
+            true
+        }
         else -> false
     }
 }
