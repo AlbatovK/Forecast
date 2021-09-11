@@ -1,4 +1,4 @@
-package com.albatros.forecast.model.database
+package com.albatros.forecast.model.database.impl
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -25,5 +25,4 @@ abstract class ForecastDatabase : RoomDatabase() {
     abstract fun getInfoDao(): InfoDao
 
     abstract fun getFactDao(): FactDao
-
 }

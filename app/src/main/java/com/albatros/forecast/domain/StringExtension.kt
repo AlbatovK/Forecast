@@ -36,3 +36,19 @@ private val daytimeMap = mapOf(
 fun String.isDaytimeDescription() = daytimeMap.containsKey(this)
 
 fun String.getDaytimeDescription(): String = daytimeMap[this]!!
+
+private val dirMap = mapOf(
+    "nw" to "Северо-западное",
+    "n"  to "Северное",
+    "ne" to "Северо-восточное",
+    "e"  to "Восточное",
+    "se" to "Юго-восточное",
+    "s"  to "Южное",
+    "sw" to "Юго-западное",
+    "w"  to "Западное",
+    "с"  to "Штиль",
+)
+
+fun String.isDirection() = dirMap.containsKey(this)
+
+fun String.getDirection(): String = dirMap[this]!!

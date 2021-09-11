@@ -10,4 +10,12 @@
     <string name="wind_speed">Скорость ветра %s м/c</string>
     <string name="min_max">Мин. / Макс. температура \n%s / %s</string>
     <string name="pressure_mm">Давление %d мм рт. ст.</string>
+    <string name="temp_hint">Температура</string>
+    <string name="feels_like_hint">Ощущается</string>
+    <string name="humidity_hint">Влажность</string>
+    <string name="pressure_hint">Давление</string>
+    <string name="wind_speed_hint">Скорость ветра</string>
+    <string name="wind_dir_hint">Направление ветра</string>
+    <string name="wind_speed_fact">%s м/c</string>
+    <string name="intro_today">Прогноз на настоящее время</string>
 </resources>

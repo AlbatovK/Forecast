@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.albatros.forecast.model.api.Api
-import com.albatros.forecast.model.database.ForecastDatabase
+import com.albatros.forecast.model.database.impl.ForecastDatabase
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
