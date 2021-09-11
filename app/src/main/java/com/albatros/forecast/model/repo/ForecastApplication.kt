@@ -1,6 +1,7 @@
 package com.albatros.forecast.model.repo
 
 import android.app.Application
+import android.util.Log
 import com.albatros.forecast.model.module.appModule
 import com.albatros.forecast.model.module.repoModule
 import com.albatros.forecast.model.module.viewModelModule
@@ -13,6 +14,7 @@ class ForecastApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Log.d("ForecastApplication", "onCreate: app created using ${modules.size} modules")
         startKoin {
             androidContext(this@ForecastApplication)
             modules(modules)

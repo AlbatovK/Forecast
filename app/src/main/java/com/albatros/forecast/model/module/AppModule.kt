@@ -2,6 +2,7 @@ package com.albatros.forecast.model.module
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.albatros.forecast.model.api.Api
 import com.albatros.forecast.model.database.ForecastDatabase
 import com.google.gson.FieldNamingPolicy
@@ -21,7 +22,7 @@ const val getPath = "/v2/informers"
 private const val dbName = "note-database"
 
 private fun provideDatabase(context: Context) =
-    Room.databaseBuilder(context, ForecastDatabase::class.java, dbName).build()
+    Room.databaseBuilder(context, ForecastDatabase::class.java, dbName).setJournalMode(RoomDatabase.JournalMode.AUTOMATIC).build()
 
 private fun provideFactDao(db: ForecastDatabase) =
     db.getFactDao()
@@ -51,7 +52,7 @@ private fun provideGsonFactory(gson: Gson) =
     GsonConverterFactory.create(gson)
 
 private fun provideGson() =
-    GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
+    GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).setPrettyPrinting().create()
 
 val appModule = module {
     single { provideDatabase(androidContext()) }

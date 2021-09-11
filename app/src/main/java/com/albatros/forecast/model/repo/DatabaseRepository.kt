@@ -1,5 +1,6 @@
 package com.albatros.forecast.model.repo
 
+import android.util.Log
 import com.albatros.forecast.model.data.ForecastMain
 import com.albatros.forecast.model.database.fact.FactDao
 import com.albatros.forecast.model.database.forecast.ForecastDao
@@ -22,7 +23,7 @@ class DatabaseRepository(
         forecast.forecast?.let { forecastDao.insertForecast(it) }
         forecast.forecast?.parts?.let { partDao.insertPart(it[0], it[1]) }
         forecastMainDao.insertForecast(forecast)
-
+        Log.d("DatabaseRepository", "insertForecast: added item to db - $forecast")
     }
 
     private suspend fun clearDatabase() {
@@ -31,6 +32,7 @@ class DatabaseRepository(
         forecastMainDao.clearTable()
         forecastDao.clearTable()
         partDao.clearTable()
+        Log.d("DatabaseRepository", "clearDatabase: cleared db")
     }
 
     suspend fun collectForecastFromDatabase(): ForecastMain {
@@ -44,6 +46,8 @@ class DatabaseRepository(
             this.info = info
             this.forecast = forecast
             this.fact = fact
+        }.also {
+            Log.d("DatabaseRepository", "collectForecastFromDatabase: collected forecast - $forecast")
         }
     }
 }

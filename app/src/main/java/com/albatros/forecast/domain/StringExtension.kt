@@ -1,6 +1,6 @@
 package com.albatros.forecast.domain
 
-private val descrMap = mapOf(
+private val stateMap = mapOf(
     "clear"                  to "Ясно",
     "partly-cloudy"          to "Малооблачно",
     "cloudy"                 to "Облачно с прояснениями",
@@ -22,9 +22,9 @@ private val descrMap = mapOf(
     "thunderstorm-with-hail" to "Гроза с градом",
 )
 
-fun String.isWeatherDescription() = descrMap.containsKey(this)
+fun String.isWeatherDescription() = stateMap.containsKey(this)
 
-fun String.getWeatherDescription(): String = descrMap.getOrDefault(this, descrMap["clear"]!!)
+fun String.getWeatherDescription(): String = stateMap[this]!!
 
 private val daytimeMap = mapOf(
     "night"   to "Ночь",
@@ -35,4 +35,4 @@ private val daytimeMap = mapOf(
 
 fun String.isDaytimeDescription() = daytimeMap.containsKey(this)
 
-fun String.getDaytimeDescription(): String = daytimeMap.getOrDefault(this, daytimeMap["day"]!!)
+fun String.getDaytimeDescription(): String = daytimeMap[this]!!

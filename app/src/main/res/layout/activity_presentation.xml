@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="260dp"
         android:animateLayoutChanges="false"
-        android:background="#4685DA"
+        android:background="@color/sky_dark"
         android:elevation="0dp"
         android:fitsSystemWindows="true"
         android:layoutAnimation="@null"
@@ -31,7 +31,7 @@
             android:fitsSystemWindows="true"
             android:layoutAnimation="@null"
             android:stateListAnimator="@null"
-            app:contentScrim="#4685DA"
+            app:contentScrim="@color/sky_dark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@android:color/transparent"
             app:toolbarId="@+id/toolbar">
