@@ -22,7 +22,8 @@ const val getPath = "/v2/informers"
 private const val dbName = "note-database"
 
 private fun provideDatabase(context: Context) =
-    Room.databaseBuilder(context, ForecastDatabase::class.java, dbName).setJournalMode(RoomDatabase.JournalMode.AUTOMATIC).build()
+    Room.databaseBuilder(context, ForecastDatabase::class.java, dbName)
+        .setJournalMode(RoomDatabase.JournalMode.AUTOMATIC).build()
 
 private fun provideFactDao(db: ForecastDatabase) =
     db.getFactDao()

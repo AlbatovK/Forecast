@@ -1,15 +1,17 @@
 package com.albatros.forecast.ui.fragment
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.albatros.forecast.R
 import com.albatros.forecast.databinding.FragmentFirstBinding
-import com.albatros.forecast.domain.getDaytimeDescription
 import com.albatros.forecast.domain.getDirection
+import com.albatros.forecast.domain.isDirection
 import com.albatros.forecast.model.data.ForecastMain
 import com.albatros.forecast.model.data.Part
 import com.albatros.forecast.ui.adapter.PartAdapter
@@ -34,14 +36,25 @@ class FirstFragment : Fragment() {
             with(contentLayout) {
                 tempFact.text = getString(R.string.temp_data, it.fact?.temp ?: 0)
                 feelsLikeFact.text = getString(R.string.temp_data, it.fact?.feelsLike ?: 0)
-                windSpeedFact.text = getString(R.string.wind_speed_fact, (it.fact?.windSpeed ?: 0).toString())
-                windDirFact.text = if (it.fact?.windDir?.isNotEmpty() == true)
-                    it.fact?.windDir!!.getDirection()
-                else getString(R.string.unknown_condition)
+                windSpeedFact.text =
+                    getString(R.string.wind_speed_fact, (it.fact?.windSpeed ?: 0).toString())
+                windDirFact.text =
+                    if (it.fact?.windDir?.isDirection() == true && it.fact?.windDir?.isNotEmpty() == true)
+                        it.fact?.windDir!!.getDirection()
+                    else getString(R.string.unknown_condition)
+                humidityFact.text = (it.fact?.humidity ?: 0.0).toInt().toString()
+                pressureFact.text =
+                    getString(R.string.pressure_mm_data, (it.fact?.pressureMm ?: 0.0).toInt())
+                sunsetFact.text = it.forecast?.sunset ?: getString(R.string.unknown_condition)
+                sunriseFact.text = it.forecast?.sunrise ?: getString(R.string.unknown_condition)
                 tempFact.visibility = View.VISIBLE
                 feelsLikeFact.visibility = View.VISIBLE
                 windSpeedFact.visibility = View.VISIBLE
                 windDirFact.visibility = View.VISIBLE
+                humidityFact.visibility = View.VISIBLE
+                pressureFact.visibility = View.VISIBLE
+                sunsetFact.visibility = View.VISIBLE
+                sunriseFact.visibility = View.VISIBLE
             }
             lifecycleScope.launch {
                 delay(500)

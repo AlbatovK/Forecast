@@ -13,8 +13,10 @@ interface Api {
      * Path - V2 Yandex.Api destination,
      * @param lat latitude
      * @param lon longitude
+     * @param lang query language
      * @return Forecast from Yandex.Weather Api
      * @see ForecastMain
+     * @see com.albatros.forecast.model.repo.MainRepository.getForecast
      */
     @Headers(value = [apiKey])
     @GET(value = getPath)

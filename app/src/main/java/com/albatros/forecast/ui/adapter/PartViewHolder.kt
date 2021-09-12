@@ -23,7 +23,7 @@ class PartViewHolder(private val binding: PartLayoutBinding) :
         val context = binding.root.context
         part?.let {
             with(binding) {
-                partName.text = if (it.partName.isNotEmpty())  it.partName.getDaytimeDescription()
+                partName.text = if (it.partName.isNotEmpty()) it.partName.getDaytimeDescription()
                 else context.getString(R.string.unknown_condition)
                 icon.loadSvgInto(link.format(if (it.icon.isEmpty()) "ovc" else it.icon))
                 avg.text = context.getString(R.string.temp_data, it.tempAvg.toInt())

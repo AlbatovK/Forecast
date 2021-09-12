@@ -33,4 +33,31 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="fact_text_style">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/navigo_medium</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/sky_font</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+
+    <style name="hint_text_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/navigo_medium</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/sky_font</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:alpha">0.7</item>
+    </style>
+
+    <style name="header_text_style">
+        <item name="android:textSize">24sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/navigo_bold</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/sky_font</item>
+        <item name="android:visibility">visible</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
 </resources>

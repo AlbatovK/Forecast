@@ -47,7 +47,10 @@ class DatabaseRepository(
             this.forecast = forecast
             this.fact = fact
         }.also {
-            Log.d("DatabaseRepository", "collectForecastFromDatabase: collected forecast - $forecast")
+            Log.d(
+                "DatabaseRepository",
+                "collectForecastFromDatabase: collected forecast - $forecast"
+            )
         }
     }
 }

@@ -17,11 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_medium"
-            android:textColor="@color/sky_font"
-            android:textSize="24sp"
-            android:visibility="invisible"
+            android:theme="@style/fact_text_style"
             app:layout_constraintStart_toStartOf="@+id/temp_hint"
             app:layout_constraintTop_toBottomOf="@+id/temp_hint" />
 
@@ -30,11 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_medium"
-            android:textColor="@color/sky_font"
-            android:textSize="24sp"
-            android:visibility="invisible"
+            android:theme="@style/fact_text_style"
             app:layout_constraintStart_toStartOf="@+id/wind_speed_hint"
             app:layout_constraintTop_toBottomOf="@+id/wind_speed_hint" />
 
@@ -43,11 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_medium"
-            android:textColor="@color/sky_font"
-            android:textSize="24sp"
-            android:visibility="invisible"
+            android:theme="@style/fact_text_style"
             app:layout_constraintStart_toStartOf="@+id/wind_dir_hint"
             app:layout_constraintTop_toBottomOf="@+id/wind_dir_hint" />
 
@@ -56,11 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/navigo_medium"
-            android:textColor="@color/sky_font"
-            android:textSize="24sp"
-            android:visibility="invisible"
+            android:theme="@style/fact_text_style"
             app:layout_constraintStart_toStartOf="@+id/feels_like_hint"
             app:layout_constraintTop_toBottomOf="@+id/feels_like_hint" />
 
@@ -70,11 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:alpha="0.7"
-            android:fontFamily="@font/navigo_medium"
             android:text="@string/temp_hint"
-            android:textColor="@color/sky_font"
-            android:textSize="16sp"
+            android:theme="@style/hint_text_style"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,11 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:alpha="0.7"
-            android:fontFamily="@font/navigo_medium"
             android:text="@string/wind_speed_hint"
-            android:textColor="@color/sky_font"
-            android:textSize="16sp"
+            android:theme="@style/hint_text_style"
             app:layout_constraintStart_toStartOf="@+id/temp_hint"
             app:layout_constraintTop_toBottomOf="@+id/temp_fact" />
 
@@ -96,11 +74,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:alpha="0.7"
-            android:fontFamily="@font/navigo_medium"
             android:text="@string/wind_dir_hint"
-            android:textColor="@color/sky_font"
-            android:textSize="16sp"
+            android:theme="@style/hint_text_style"
             app:layout_constraintStart_toEndOf="@+id/wind_speed_hint"
             app:layout_constraintTop_toTopOf="@+id/wind_speed_hint" />
 
@@ -108,13 +83,87 @@
             android:id="@+id/feels_like_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.7"
-            android:fontFamily="@font/navigo_medium"
             android:text="@string/feels_like_hint"
-            android:textColor="@color/sky_font"
-            android:textSize="16sp"
+            android:theme="@style/hint_text_style"
             app:layout_constraintStart_toStartOf="@+id/wind_dir_hint"
             app:layout_constraintTop_toTopOf="@+id/temp_hint" />
+
+        <TextView
+            android:id="@+id/humidity_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/humidity_hint"
+            android:theme="@style/hint_text_style"
+            app:layout_constraintStart_toStartOf="@+id/temp_hint"
+            app:layout_constraintTop_toBottomOf="@+id/wind_speed_fact" />
+
+        <TextView
+            android:id="@+id/pressure_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/pressure_hint"
+            android:theme="@style/hint_text_style"
+            app:layout_constraintStart_toStartOf="@+id/wind_dir_fact"
+            app:layout_constraintTop_toBottomOf="@+id/wind_dir_fact" />
+
+        <TextView
+            android:id="@+id/humidity_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:theme="@style/fact_text_style"
+            app:layout_constraintStart_toStartOf="@+id/humidity_hint"
+            app:layout_constraintTop_toBottomOf="@+id/humidity_hint" />
+
+        <TextView
+            android:id="@+id/pressure_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:theme="@style/fact_text_style"
+            app:layout_constraintStart_toStartOf="@+id/pressure_hint"
+            app:layout_constraintTop_toBottomOf="@+id/pressure_hint" />
+
+
+        <TextView
+            android:id="@+id/sunrise_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/sunrise_hint"
+            android:theme="@style/hint_text_style"
+            app:layout_constraintStart_toStartOf="@+id/temp_hint"
+            app:layout_constraintTop_toBottomOf="@+id/humidity_fact" />
+
+        <TextView
+            android:id="@+id/sunset_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/sunset_hint"
+            android:theme="@style/hint_text_style"
+            app:layout_constraintStart_toStartOf="@+id/pressure_fact"
+            app:layout_constraintTop_toBottomOf="@+id/pressure_fact" />
+
+        <TextView
+            android:id="@+id/sunrise_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:theme="@style/fact_text_style"
+            app:layout_constraintStart_toStartOf="@+id/sunrise_hint"
+            app:layout_constraintTop_toBottomOf="@+id/sunrise_hint" />
+
+        <TextView
+            android:id="@+id/sunset_fact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:theme="@style/fact_text_style"
+            app:layout_constraintStart_toStartOf="@+id/sunset_hint"
+            app:layout_constraintTop_toBottomOf="@+id/sunset_hint" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

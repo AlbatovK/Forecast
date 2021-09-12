@@ -5,18 +5,18 @@
         android:id="@+id/exit"
         android:icon="@drawable/ic_baseline_exit"
         android:orderInCategory="3"
-        android:title="@string/app_name"
+        android:title="@string/menu_hint_exit"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/refresh"
         android:icon="@drawable/ic_refresh"
         android:orderInCategory="2"
-        android:title="@string/app_name"
+        android:title="@string/menu_hint_refresh"
         app:showAsAction="always" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_baseline_settings"
         android:orderInCategory="1"
-        android:title="@string/app_name"
+        android:title="@string/menu_hint_settings"
         app:showAsAction="always" />
 </menu>

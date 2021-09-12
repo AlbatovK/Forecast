@@ -34,11 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/navigo_bold"
-                android:padding="8dp"
                 android:text="@string/intro_today"
-                android:textColor="@color/sky_font"
-                android:textSize="24sp" />
+                android:theme="@style/header_text_style" />
 
             <include
                 android:id="@+id/content_layout"
@@ -48,11 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/navigo_bold"
-                android:padding="8dp"
                 android:text="@string/intro"
-                android:textColor="@color/sky_font"
-                android:textSize="24sp" />
+                android:theme="@style/header_text_style" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list"

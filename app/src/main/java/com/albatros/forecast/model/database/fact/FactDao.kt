@@ -1,11 +1,6 @@
 package com.albatros.forecast.model.database.fact
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
-import androidx.room.Query
-import androidx.room.OnConflictStrategy
+import androidx.room.*
 import com.albatros.forecast.model.data.Fact
 
 @Dao
