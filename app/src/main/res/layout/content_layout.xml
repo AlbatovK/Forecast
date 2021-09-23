@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:theme="@style/fact_text_style"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/wind_dir_hint"
             app:layout_constraintTop_toBottomOf="@+id/wind_dir_hint" />
 

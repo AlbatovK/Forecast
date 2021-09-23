@@ -65,7 +65,7 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="8dp"
                 android:padding="8dp"
-                app:cardBackgroundColor="@color/card_back"
+                app:cardBackgroundColor="@android:color/transparent"
                 app:cardCornerRadius="10dp"
                 app:cardMaxElevation="4dp">
 
@@ -76,7 +76,7 @@
                     android:gravity="center"
                     android:padding="4dp"
                     android:text="@string/hint"
-                    android:textColor="@color/sky_font"
+                    android:textColor="@color/white"
                     android:textSize="20sp" />
 
             </androidx.cardview.widget.CardView>

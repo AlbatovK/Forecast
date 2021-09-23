@@ -43,11 +43,11 @@ private fun providePartDao(db: ForecastDatabase) =
 private fun provideApi(retrofit: Retrofit) =
     retrofit.create(Api::class.java)
 
-private fun provideRetrofit(factory: GsonConverterFactory) = Retrofit.Builder().let {
-    it.baseUrl(baseUrl)
-    it.addConverterFactory(factory)
-    it.build()
-}
+private fun provideRetrofit(factory: GsonConverterFactory) = Retrofit.Builder()
+    .baseUrl(baseUrl)
+    .addConverterFactory(factory)
+    .build()
+
 
 private fun provideGsonFactory(gson: Gson) =
     GsonConverterFactory.create(gson)
@@ -57,13 +57,16 @@ private fun provideGson() =
 
 val appModule = module {
     single { provideDatabase(androidContext()) }
+
     single { provideFactDao(get()) }
     single { provideForecastDao(get()) }
     single { provideInfoDao(get()) }
     single { provideForecastMainDao(get()) }
     single { providePartDao(get()) }
+
     single { provideApi(get()) }
     single { provideRetrofit(get()) }
+
     single { provideGsonFactory(get()) }
     single { provideGson() }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "277964315553",
+    "project_id": "forecast-1ed6c",
+    "storage_bucket": "forecast-1ed6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277964315553:android:5207b06c844077744e89e0",
+        "android_client_info": {
+          "package_name": "com.albatros.forecast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277964315553-6jjlg0ei8446fmv3cmor4ohika6dhqp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD20k9RdRe8xQ5ItPR5dqrGdXBICjpBsSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277964315553-6jjlg0ei8446fmv3cmor4ohika6dhqp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
