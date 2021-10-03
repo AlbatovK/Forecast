@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.albatros.forecast.model.data.ForecastMain
 import com.albatros.forecast.model.repo.MainRepository
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.dsl.koinApplication
 
 class PresentationViewModel(private val repo: MainRepository) : ViewModel() {
     private val _forecast = MutableLiveData<ForecastMain>().apply {

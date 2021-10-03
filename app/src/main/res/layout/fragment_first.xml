@@ -44,7 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="64dp"
                 android:text="@string/intro"
                 android:theme="@style/header_text_style" />
 
@@ -58,32 +58,23 @@
                 android:orientation="vertical"
                 android:overScrollMode="never" />
 
-            <androidx.cardview.widget.CardView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginRight="8dp"
+                android:alpha="0.7"
+                android:fontFamily="@font/navigo_medium"
+                android:gravity="center"
                 android:padding="8dp"
-                app:cardBackgroundColor="@android:color/transparent"
-                app:cardCornerRadius="10dp"
-                app:cardMaxElevation="4dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/navigo_medium"
-                    android:gravity="center"
-                    android:padding="4dp"
-                    android:text="@string/hint"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-            </androidx.cardview.widget.CardView>
+                android:text="@string/hint"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="12dp"
                 android:alpha="0"
                 android:contentDescription="@string/app_name" />
 

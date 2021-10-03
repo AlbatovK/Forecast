@@ -27,25 +27,29 @@ class PartViewHolder(private val binding: PartLayoutBinding) :
                 else context.getString(R.string.unknown_condition)
                 icon.loadSvgInto(link.format(if (it.icon.isEmpty()) "ovc" else it.icon))
                 avg.text = context.getString(R.string.temp_data, it.tempAvg.toInt())
-                pressure.text = context.getString(
-                    R.string.pressure_mm,
+                pressureFact.text = context.getString(
+                    R.string.pressure_mm_data,
                     it.pressureMm.toInt()
                 )
-                tempMin.text = context.getString(
-                    R.string.min_max,
-                    context.getString(R.string.temp_data, it.tempMin.toInt()),
-                    context.getString(R.string.temp_data, it.tempMax.toInt())
+                minFact.text = context.getString(
+                    R.string.temp_data,
+                    it.tempMin.toInt()
                 )
-                windSpeed.text = context.getString(
-                    R.string.wind_speed,
+                maxFact.text = context.getString(
+                    R.string.temp_data,
+                    it.tempMax.toInt()
+                )
+                windSpeedFact.text = context.getString(
+                    R.string.wind_speed_fact,
                     (it.windSpeed).toString()
                 )
                 partName.visibility = View.VISIBLE
+                pressureFact.visibility = View.VISIBLE
                 icon.visibility = View.VISIBLE
                 avg.visibility = View.VISIBLE
-                tempMin.visibility = View.VISIBLE
-                pressure.visibility = View.VISIBLE
-                windSpeed.visibility = View.VISIBLE
+                minFact.visibility = View.VISIBLE
+                maxFact.visibility = View.VISIBLE
+                windSpeedFact.visibility = View.VISIBLE
             }
         }
     }

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        tools:ignore="UseCompoundDrawables">
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/icon"
@@ -30,21 +29,23 @@
             android:id="@+id/part_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/navigo_medium"
             android:paddingStart="4dp"
-            android:paddingEnd="0dp"
             android:paddingTop="8dp"
+            android:paddingEnd="0dp"
+            android:layout_marginStart="8dp"
             android:textColor="@color/sky_font"
             android:textSize="20sp"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            tools:layout_editor_absoluteY="42dp" />
 
         <TextView
             android:id="@+id/avg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/navigo_medium"
             android:gravity="center"
@@ -56,44 +57,192 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/temp_min"
-        android:layout_width="match_parent"
+        android:id="@+id/min_fact"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/navigo_regular"
-        android:gravity="center"
-        android:textColor="@color/sky_font"
-        android:textSize="20sp"
-        android:visibility="invisible" />
+        android:layout_marginTop="8dp"
+        android:theme="@style/fact_text_style"
+        app:layout_constraintStart_toStartOf="@+id/min_hint"
+        app:layout_constraintTop_toBottomOf="@+id/min_hint" />
 
     <TextView
-        android:id="@+id/pressure"
-        android:layout_width="match_parent"
+        android:id="@+id/wind_speed_fact"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/navigo_regular"
-        android:gravity="center"
-        android:textColor="@color/sky_font"
-        android:textSize="20sp"
-        android:visibility="invisible" />
+        android:layout_marginTop="8dp"
+        android:theme="@style/fact_text_style"
+        app:layout_constraintStart_toStartOf="@+id/wind_speed_hint"
+        app:layout_constraintTop_toBottomOf="@+id/wind_speed_hint" />
 
     <TextView
-        android:id="@+id/wind_speed"
-        android:layout_width="match_parent"
+        android:id="@+id/max_fact"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/navigo_regular"
-        android:gravity="center"
-        android:textColor="@color/sky_font"
-        android:textSize="20sp"
-        android:visibility="invisible" />
+        android:layout_marginTop="8dp"
+        android:theme="@style/fact_text_style"
+        app:layout_constraintStart_toStartOf="@+id/feels_like_hint"
+        app:layout_constraintTop_toBottomOf="@+id/feels_like_hint" />
+
+    <TextView
+        android:id="@+id/min_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/min_temp"
+        android:theme="@style/hint_text_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear" />
+
+    <TextView
+        android:id="@+id/wind_speed_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/wind_speed_hint"
+        android:theme="@style/hint_text_style"
+        app:layout_constraintStart_toStartOf="@+id/min_hint"
+        app:layout_constraintTop_toBottomOf="@+id/min_fact" />
+
+    <TextView
+        android:id="@+id/feels_like_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/max_temp"
+        android:theme="@style/hint_text_style"
+        app:layout_constraintStart_toStartOf="@+id/pressure_hint"
+        app:layout_constraintTop_toTopOf="@+id/min_hint" />
+
+    <TextView
+        android:id="@+id/pressure_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/pressure_hint"
+        android:theme="@style/hint_text_style"
+        app:layout_constraintStart_toEndOf="@+id/wind_speed_hint"
+        app:layout_constraintTop_toBottomOf="@+id/max_fact" />
+
+    <TextView
+        android:id="@+id/pressure_fact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:theme="@style/fact_text_style"
+        app:layout_constraintStart_toStartOf="@+id/pressure_hint"
+        app:layout_constraintTop_toBottomOf="@+id/pressure_hint" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="24dp"
+        android:layout_marginTop="16dp"
         android:alpha="0"
-        android:contentDescription="@string/app_name" />
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pressure_fact" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_margin="4dp"
+android:gravity="center"
+android:orientation="vertical">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:layout_margin="4dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:textColor="@color/sky_font"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/part_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/navigo_medium"
+        android:paddingStart="4dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="0dp"
+        android:textColor="@color/sky_font"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/avg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/navigo_medium"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:textColor="@color/sky_font"
+        android:textSize="24sp"
+        android:visibility="invisible" />
 
 </LinearLayout>
+
+<TextView
+    android:id="@+id/temp_min"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:fontFamily="@font/navigo_regular"
+    android:gravity="center"
+    android:textColor="@color/sky_font"
+    android:textSize="20sp"
+    android:visibility="invisible" />
+
+<TextView
+    android:id="@+id/pressure"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:fontFamily="@font/navigo_regular"
+    android:gravity="center"
+    android:textColor="@color/sky_font"
+    android:textSize="20sp"
+    android:visibility="invisible" />
+
+<TextView
+    android:id="@+id/wind_speed"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:fontFamily="@font/navigo_regular"
+    android:gravity="center"
+    android:textColor="@color/sky_font"
+    android:textSize="20sp"
+    android:visibility="invisible" />
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="24dp"
+    android:alpha="0"
+    android:contentDescription="@string/app_name" />
+
+</LinearLayout>
+
+-->
 
 

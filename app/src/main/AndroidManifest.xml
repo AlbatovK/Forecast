@@ -2,12 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.albatros.forecast">
-
     <!-- Required for API access -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Required for constraining refresh workers -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Required for checking location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".model.repo.ForecastApplication"
@@ -22,18 +23,12 @@
 
         <activity
             android:name=".ui.activity.PresentationActivity"
+            android:exported="true"
             android:theme="@style/Theme.Forecast.NoActionBar">
-
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-
             </intent-filter>
-
         </activity>
-
     </application>
-
 </manifest>
