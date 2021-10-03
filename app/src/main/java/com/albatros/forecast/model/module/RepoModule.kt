@@ -2,6 +2,7 @@ package com.albatros.forecast.model.module
 
 import android.content.Context
 import com.albatros.forecast.model.repo.DatabaseRepository
+import com.albatros.forecast.model.repo.LocationRepository
 import com.albatros.forecast.model.repo.MainRepository
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -17,6 +18,7 @@ private fun provideFirebaseAnalytics(context: Context) =
 val repoModule = module {
     single { MainRepository(get(), get(), get(), get()) }
     single { DatabaseRepository(get(), get(), get(), get(), get()) }
+    single { LocationRepository(get(), androidContext()) }
     single { provideLocationClient(androidContext()) }
     single { provideFirebaseAnalytics(androidContext()) }
 }
