@@ -19,9 +19,10 @@ class MainRepository(
         val (lat, lon) = locationRepository.getLastLocation()
         if (_forecast == null || refresh) {
             Log.d("getForecast", "Passes location: $lat, $lon")
-            val bundle = Bundle()
-            bundle.putString("lat", "$lat")
-            bundle.putString("lon", "$lon")
+            val bundle = Bundle().apply {
+                putString("lat", "$lat")
+                putString("lon", "$lon")
+            }
             firebaseAnalytics.logEvent("Location", bundle)
             _forecast = try { api.getForecast(lat, lon, lang) }
             catch (e1: Exception) {
