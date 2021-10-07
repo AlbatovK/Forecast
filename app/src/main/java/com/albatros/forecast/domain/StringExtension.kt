@@ -31,7 +31,7 @@ private val dirMap = mapOf(
     "s" to "Южное",
     "sw" to "Юго-западное",
     "w" to "Западное",
-    "с" to "Штиль",
+    "c" to "Штиль",
 )
 
 private val daytimeMap = mapOf(
