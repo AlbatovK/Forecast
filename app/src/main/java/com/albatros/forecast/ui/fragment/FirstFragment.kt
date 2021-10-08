@@ -1,6 +1,7 @@
 package com.albatros.forecast.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
 
     private val onDataLoadedObserver = Observer<ForecastMain> {
+        Log.d("FirstFragment", "Updated LiveData")
         with(binding) {
             progressBar.isActivated = false
             progressBar.clearAnimation()

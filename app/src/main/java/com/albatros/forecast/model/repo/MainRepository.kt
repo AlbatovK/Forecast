@@ -2,6 +2,8 @@ package com.albatros.forecast.model.repo
 
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.albatros.forecast.model.api.Api
 import com.albatros.forecast.model.data.ForecastMain
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -37,10 +39,16 @@ class MainRepository(
                 }
             }
         }
-        if (_forecast?.forecast?.parts?.isNotEmpty() == true && ForecastMain() != _forecast)
+        if (_forecast?.forecast?.parts?.isNotEmpty() == true && ForecastMain() != _forecast) {
             dbRepo.insertForecast(_forecast!!)
+            _forecastLive.value = _forecast!!
+        }
         return _forecast!!
     }
 
     private var _forecast: ForecastMain? = null
+
+    private var _forecastLive = MutableLiveData<ForecastMain>()
+
+    val forecastLive: LiveData<ForecastMain> = _forecastLive
 }
