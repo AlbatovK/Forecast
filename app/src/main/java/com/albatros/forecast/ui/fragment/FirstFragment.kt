@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.albatros.forecast.R
 import com.albatros.forecast.databinding.FragmentFirstBinding
 import com.albatros.forecast.domain.getDirection
+import com.albatros.forecast.domain.gradient.conditionToType
 import com.albatros.forecast.domain.isDirection
 import com.albatros.forecast.model.data.ForecastMain
 import com.albatros.forecast.model.data.Part

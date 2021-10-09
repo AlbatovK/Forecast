@@ -19,6 +19,7 @@ class MainRepository(
     suspend fun getForecast(lang: String = "en_US", refresh: Boolean = false): ForecastMain {
         delay(2_000)
         val (lat, lon) = locationRepository.getLastLocation()
+        var collected = false
         if (_forecast == null || refresh) {
             Log.d("getForecast", "Passes location: $lat, $lon")
             val bundle = Bundle().apply {
@@ -32,14 +33,18 @@ class MainRepository(
                     "Exception in MainRepository (net) ",
                     "getForecast: ${e1.localizedMessage ?: "undefined error"}"
                 )
-                try { dbRepo.collectForecastFromDatabase() }
+                try {
+                    dbRepo.collectForecastFromDatabase().also {
+                        collected = true
+                    }
+                }
                 catch (e2: Exception) {
                     Log.d("Exception in MainRepository (db) ", "getForecast: ${e2.localizedMessage ?: "undefined error"}")
                     ForecastMain()
                 }
             }
         }
-        if (_forecast?.forecast?.parts?.isNotEmpty() == true && ForecastMain() != _forecast) {
+        if (_forecast?.forecast?.parts?.isNotEmpty() == true && ForecastMain() != _forecast && !collected) {
             dbRepo.insertForecast(_forecast!!)
             _forecastLive.value = _forecast!!
         }

@@ -44,9 +44,9 @@
 
                 <ImageView
                     android:id="@+id/img_state"
-                    android:layout_width="200dp"
-                    android:layout_marginStart="12dp"
+                    android:layout_width="180dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="24dp"
-                    android:gravity="center"
+                    android:gravity="top"
                     android:orientation="vertical"
                     android:paddingTop="16dp">
 
@@ -79,7 +79,10 @@
                     <TextView
                         android:id="@+id/state"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="80dp"
+                        android:autoSizeMaxTextSize="24sp"
+                        android:autoSizeMinTextSize="16sp"
+                        android:autoSizeTextType="uniform"
                         android:background="@android:color/transparent"
                         android:fontFamily="@font/navigo_bold"
                         android:gravity="start"
@@ -108,6 +111,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_presentation" />
+    <include layout="@layout/content_presentation" android:id="@+id/id_presentation" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

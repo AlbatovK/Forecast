@@ -2,18 +2,10 @@ package com.albatros.forecast.model.database.info
 
 import androidx.room.*
 import com.albatros.forecast.model.data.Info
+import com.albatros.forecast.model.database.dao.BaseDao
 
 @Dao
-interface InfoDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertInfo(info: Info)
-
-    @Delete
-    suspend fun deleteInfo(info: Info)
-
-    @Update
-    suspend fun updateInfo(info: Info)
+interface InfoDao : BaseDao<Info> {
 
     @Query("Delete From info")
     suspend fun clearTable()

@@ -18,11 +18,11 @@ class DatabaseRepository(
 
     suspend fun insertForecast(forecast: ForecastMain) {
         clearDatabase()
-        forecast.fact?.let { factDao.insertFact(it) }
-        forecast.info?.let { infoDao.insertInfo(it) }
-        forecast.forecast?.let { forecastDao.insertForecast(it) }
-        forecast.forecast?.parts?.let { partDao.insertPart(it[0], it[1]) }
-        forecastMainDao.insertForecast(forecast)
+        forecast.fact?.let { factDao.insert(it) }
+        forecast.info?.let { infoDao.insert(it) }
+        forecast.forecast?.let { forecastDao.insert(it) }
+        forecast.forecast?.parts?.let { partDao.insert(it[0], it[1]) }
+        forecastMainDao.insert(forecast)
         Log.d("DatabaseRepository", "insertForecast: added item to db - $forecast")
     }
 

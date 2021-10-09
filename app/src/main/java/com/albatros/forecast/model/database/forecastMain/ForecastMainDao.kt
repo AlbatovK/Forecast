@@ -2,18 +2,10 @@ package com.albatros.forecast.model.database.forecastMain
 
 import androidx.room.*
 import com.albatros.forecast.model.data.ForecastMain
+import com.albatros.forecast.model.database.dao.BaseDao
 
 @Dao
-interface ForecastMainDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertForecast(forecast: ForecastMain)
-
-    @Delete
-    suspend fun deleteForecast(forecast: ForecastMain)
-
-    @Update
-    suspend fun updateForecast(forecast: ForecastMain)
+interface ForecastMainDao : BaseDao<ForecastMain> {
 
     @Query("Delete From forecast_main")
     suspend fun clearTable()

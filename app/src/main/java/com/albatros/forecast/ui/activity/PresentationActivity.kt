@@ -2,6 +2,7 @@ package com.albatros.forecast.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,6 +17,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.albatros.forecast.R
 import com.albatros.forecast.databinding.ActivityPresentationBinding
 import com.albatros.forecast.domain.getWeatherDescription
+import com.albatros.forecast.domain.gradient.GradientType
+import com.albatros.forecast.domain.gradient.conditionToType
+import com.albatros.forecast.domain.gradient.makeGradient
 import com.albatros.forecast.domain.isWeatherDescription
 import com.albatros.forecast.domain.link
 import com.albatros.forecast.domain.loadSvgInto
@@ -33,6 +37,18 @@ class PresentationActivity : AppCompatActivity() {
 
     private val onDataLoadedObserver = Observer<ForecastMain> {
         with(binding) {
+            val type = (it.fact?.condition)?.conditionToType() ?: GradientType.TYPE_CLEAR
+            binding.appBar.background = when(type) {
+                GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
+                GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
+                else -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
+            }
+            binding.toolbarLayout.contentScrim = when(type) {
+                GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
+                GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
+                else -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
+            }
+            binding.idPresentation.contentPresentation.background = makeGradient(type, resources, theme)
             val downloadLink = link.format(it.fact?.icon ?: "ovc")
             imgState.loadSvgInto(downloadLink)
             temp.text = getString(R.string.temp_data, it.fact?.temp ?: 0)
