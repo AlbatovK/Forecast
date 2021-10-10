@@ -26,7 +26,7 @@ class DatabaseRepository(
         Log.d("DatabaseRepository", "insertForecast: added item to db - $forecast")
     }
 
-    private suspend fun clearDatabase() {
+    suspend fun clearDatabase() {
         factDao.clearTable()
         infoDao.clearTable()
         forecastMainDao.clearTable()
@@ -35,7 +35,11 @@ class DatabaseRepository(
         Log.d("DatabaseRepository", "clearDatabase: cleared db")
     }
 
+    suspend fun getItemsCount() = forecastMainDao.getAll().size
+
     suspend fun collectForecastFromDatabase(): ForecastMain {
+        if (getItemsCount() == 0)
+            return ForecastMain()
         val main = forecastMainDao.getAll()[0]
         val info = infoDao.getAll()[0]
         val fact = factDao.getAll()[0]

@@ -21,23 +21,23 @@ const val getPath = "/v2/informers"
 
 private const val dbName = "note-database"
 
-private fun provideDatabase(context: Context) =
+fun provideDatabase(context: Context) =
     Room.databaseBuilder(context, ForecastDatabase::class.java, dbName)
         .setJournalMode(RoomDatabase.JournalMode.AUTOMATIC).build()
 
-private fun provideFactDao(db: ForecastDatabase) =
+fun provideFactDao(db: ForecastDatabase) =
     db.getFactDao()
 
-private fun provideForecastDao(db: ForecastDatabase) =
+fun provideForecastDao(db: ForecastDatabase) =
     db.getForecastDao()
 
-private fun provideForecastMainDao(db: ForecastDatabase) =
+fun provideForecastMainDao(db: ForecastDatabase) =
     db.getForecastMainDao()
 
-private fun provideInfoDao(db: ForecastDatabase) =
+fun provideInfoDao(db: ForecastDatabase) =
     db.getInfoDao()
 
-private fun providePartDao(db: ForecastDatabase) =
+fun providePartDao(db: ForecastDatabase) =
     db.getPartDao()
 
 private fun provideApi(retrofit: Retrofit) =
@@ -47,7 +47,6 @@ private fun provideRetrofit(factory: GsonConverterFactory) = Retrofit.Builder()
     .baseUrl(baseUrl)
     .addConverterFactory(factory)
     .build()
-
 
 private fun provideGsonFactory(gson: Gson) =
     GsonConverterFactory.create(gson)

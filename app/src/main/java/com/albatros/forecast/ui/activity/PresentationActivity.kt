@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.transition.Fade
+import android.transition.TransitionManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -38,6 +40,7 @@ class PresentationActivity : AppCompatActivity() {
     private val onDataLoadedObserver = Observer<ForecastMain> {
         with(binding) {
             val type = (it.fact?.condition)?.conditionToType() ?: GradientType.TYPE_CLEAR
+            TransitionManager.beginDelayedTransition(binding.root, Fade(Fade.MODE_IN))
             binding.appBar.background = when(type) {
                 GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
                 GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
@@ -49,6 +52,7 @@ class PresentationActivity : AppCompatActivity() {
                 else -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
             }
             binding.idPresentation.contentPresentation.background = makeGradient(type, resources, theme)
+            TransitionManager.endTransitions(binding.root)
             val downloadLink = link.format(it.fact?.icon ?: "ovc")
             imgState.loadSvgInto(downloadLink)
             temp.text = getString(R.string.temp_data, it.fact?.temp ?: 0)

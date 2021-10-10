@@ -11,7 +11,7 @@ import org.junit.Test
 
 class UnitTest {
 
-    @Test
+    @Test(timeout = 1000)
     fun stringExtensions_areCorrect() {
         val dayTimeIsWeather = "midnight".isWeatherDescription()
         assertEquals(false, dayTimeIsWeather)
@@ -25,7 +25,7 @@ class UnitTest {
         assertEquals(true, correctDirection)
     }
 
-    @Test
+    @Test(timeout = 1000)
     fun gradientExtensions_areCorrect() {
         val input = arrayOf("clear", "cloudy", "snow", "thunderstorm")
         val expected = arrayOf(

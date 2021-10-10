@@ -53,6 +53,7 @@ fun makeGradient(
     val colors: IntArray = when (type) {
         GradientType.TYPE_CLEAR -> intArrayOf(res.getColor(Colors.sky_dark, theme), res.getColor(Colors.sky_light, theme))
         GradientType.TYPE_CLOUDY ->  intArrayOf(res.getColor(Colors.cloud_light, theme), res.getColor(Colors.cloud_dark, theme))
+        GradientType.TYPE_SNOW -> intArrayOf(res.getColor(Colors.snow_light, theme), res.getColor(Colors.snow_dark, theme))
         else -> intArrayOf(Colors.sky_dark, Colors.sky_light)
     }
     return GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors)
