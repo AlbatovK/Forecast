@@ -19,6 +19,8 @@ const val apiKey = "X-Yandex-API-Key: e5422830-52b1-4b27-9f2a-d18afe05825d"
 
 const val getPath = "/v2/informers"
 
+private const val settingsName = "settings"
+
 private const val dbName = "note-database"
 
 fun provideDatabase(context: Context) =
@@ -54,6 +56,9 @@ private fun provideGsonFactory(gson: Gson) =
 private fun provideGson() =
     GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).setPrettyPrinting().create()
 
+private fun provideSharedPreferences(context: Context) =
+    context.getSharedPreferences(settingsName, Context.MODE_PRIVATE)
+
 val appModule = module {
     single { provideDatabase(androidContext()) }
 
@@ -68,4 +73,6 @@ val appModule = module {
 
     single { provideGsonFactory(get()) }
     single { provideGson() }
+
+    single { provideSharedPreferences(androidContext()) }
 }

@@ -8,6 +8,8 @@
     <color name="cloud_dark">#7c8180</color>
     <color name="snow_light">#b2bcc4</color>
     <color name="snow_dark">#929b9d</color>
+    <color name="thunder_light">#747B83</color>
+    <color name="thunder_dark">#414141</color>
     <color name="sky_font">#e3e4e8</color>
     <color name="card_back">#E9000000</color>
 </resources>

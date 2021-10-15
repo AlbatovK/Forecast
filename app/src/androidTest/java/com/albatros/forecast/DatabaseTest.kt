@@ -49,7 +49,7 @@ class DatabaseTest : TestCase() {
     }
 
     @Test(timeout = 300)
-    fun testClear(): Unit = runBlocking {
+    fun testClear(): Unit = runBlocking(Dispatchers.IO) {
         try {
             dbRepo.clearDatabase()
             dbRepo.collectForecastFromDatabase()

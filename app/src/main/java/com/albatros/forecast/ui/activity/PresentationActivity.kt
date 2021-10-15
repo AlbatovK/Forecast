@@ -2,22 +2,23 @@ package com.albatros.forecast.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.transition.Fade
 import android.transition.TransitionManager
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.WindowManager
+import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.albatros.forecast.R
 import com.albatros.forecast.databinding.ActivityPresentationBinding
+import com.albatros.forecast.databinding.DialogLayoutBinding
 import com.albatros.forecast.domain.getWeatherDescription
 import com.albatros.forecast.domain.gradient.GradientType
 import com.albatros.forecast.domain.gradient.conditionToType
@@ -41,17 +42,7 @@ class PresentationActivity : AppCompatActivity() {
         with(binding) {
             val type = (it.fact?.condition)?.conditionToType() ?: GradientType.TYPE_CLEAR
             TransitionManager.beginDelayedTransition(binding.root, Fade(Fade.MODE_IN))
-            binding.appBar.background = when(type) {
-                GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
-                GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
-                else -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
-            }
-            binding.toolbarLayout.contentScrim = when(type) {
-                GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
-                GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
-                else -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
-            }
-            binding.idPresentation.contentPresentation.background = makeGradient(type, resources, theme)
+            setGradient(type)
             TransitionManager.endTransitions(binding.root)
             val downloadLink = link.format(it.fact?.icon ?: "ovc")
             imgState.loadSvgInto(downloadLink)
@@ -62,6 +53,22 @@ class PresentationActivity : AppCompatActivity() {
             temp.visibility = View.VISIBLE
             imgState.visibility = View.VISIBLE
             state.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setGradient(type: GradientType) {
+        binding.idPresentation.contentPresentation.background = makeGradient(type, resources, theme)
+        binding.appBar.background = when(type) {
+            GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
+            GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
+            GradientType.TYPE_SNOW -> ColorDrawable(resources.getColor(R.color.snow_dark, theme))
+            GradientType.TYPE_THUNDER -> ColorDrawable(resources.getColor(R.color.thunder_dark, theme))
+        }
+        binding.toolbarLayout.contentScrim = when(type) {
+            GradientType.TYPE_CLOUDY -> ColorDrawable(resources.getColor(R.color.cloud_light, theme))
+            GradientType.TYPE_CLEAR -> ColorDrawable(resources.getColor(R.color.sky_dark, theme))
+            GradientType.TYPE_SNOW -> ColorDrawable(resources.getColor(R.color.snow_dark, theme))
+            GradientType.TYPE_THUNDER -> ColorDrawable(resources.getColor(R.color.thunder_dark, theme))
         }
     }
 
@@ -109,12 +116,34 @@ class PresentationActivity : AppCompatActivity() {
         setWindowState()
     }
 
+    override fun onStop() {
+        super.onStop()
+        presentationViewModel.forecast.removeObservers(this)
+    }
+
+    private fun showSettingsDialog() {
+        val builder = AlertDialog.Builder(this)
+        val binding = DialogLayoutBinding.inflate(layoutInflater)
+        val dialog = with(builder) {
+            setView(binding.root)
+            create()
+        }
+        dialog.window?.let {
+            it.setBackgroundDrawable(ResourcesCompat.getDrawable(resources, R.drawable.dialog_shape, theme))
+            it.setGravity(Gravity.BOTTOM)
+            it.attributes.verticalMargin = 0.08F
+        }
+        dialog.show()
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.exit -> {
+            finish()
             finishAffinity()
             true
         }
         R.id.settings -> {
+            showSettingsDialog()
             true
         }
         R.id.refresh -> {

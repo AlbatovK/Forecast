@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 class FirstViewModel(private val repo: MainRepository) : ViewModel() {
 
-    private val observer = Observer<ForecastMain> { _forecast.value = it }
+    private val observer = Observer<ForecastMain> { value -> _forecast?.let { it.value = value  } }
 
     init {
         repo.forecastLive.observeForever(observer)

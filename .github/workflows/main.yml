@@ -13,3 +13,10 @@ jobs:
         with: { java-version: 1.11 }
       - name: Run tests
         run: ./gradlew test
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-release.apk
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
