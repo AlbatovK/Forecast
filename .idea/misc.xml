@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/drawable/dialog_shape.xml" value="0.67" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/drawable/ic_done.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/drawable/ic_edit.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/drawable/image_shape.xml" value="0.2203125" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/drawable/switch_track.xml" value="0.2203125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/activity_presentation.xml" value="0.12273550724637682" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/content_layout.xml" value="0.22" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/dialog_layout.xml" value="0.6128" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/dialog_layout.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/dialog_shape.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/fragment_first.xml" value="0.15172101449275363" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Forecast/app/src/main/res/layout/part_layout.xml" value="0.22" />

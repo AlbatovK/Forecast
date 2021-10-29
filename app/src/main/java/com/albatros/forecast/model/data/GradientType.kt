@@ -1,4 +1,4 @@
-package com.albatros.forecast.domain.gradient
+package com.albatros.forecast.model.data
 
 enum class GradientType {
     TYPE_CLEAR,

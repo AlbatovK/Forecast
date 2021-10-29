@@ -31,7 +31,7 @@ class LocationRepository(locationClient: FusedLocationProviderClient, context: C
                 }
             }
             locationClient.lastLocation.addOnFailureListener { exception ->
-                Log.d("Error in getting Location", exception.localizedMessage ?: "undefined error")
+                Log.d("Error in Location", exception.localizedMessage ?: "undefined error")
             }
         }
     }

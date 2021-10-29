@@ -1,7 +1,7 @@
 package com.albatros.forecast.model.repo
 
 import android.content.SharedPreferences
-import com.albatros.forecast.domain.gradient.GradientType
+import com.albatros.forecast.model.data.GradientType
 
 class PreferencesRepository(private val settings: SharedPreferences) {
 
@@ -19,7 +19,6 @@ class PreferencesRepository(private val settings: SharedPreferences) {
         const val TYPE_THUNDER = "type_thunder"
 
         val changeModeConstants = arrayOf(MODE_CHANGE, MODE_NOT_CHANGE)
-        val typeConstants = arrayOf(TYPE_CLEAR, TYPE_CLOUDY, TYPE_SNOW, TYPE_THUNDER)
 
         const val exception_msg = "PreferencesRepository: Not present key type"
     }
@@ -33,7 +32,9 @@ class PreferencesRepository(private val settings: SharedPreferences) {
         }
     }
 
-    fun getGradientMode() = settings.getString(KEY_GRADIENT_CHANGE_MODE, MODE_CHANGE)
+    private fun getGradientMode() = settings.getString(KEY_GRADIENT_CHANGE_MODE, MODE_CHANGE)
+
+    fun isChangingEnabled() = getGradientMode() == MODE_CHANGE
 
     fun putGradientType(type: GradientType) {
         val value = when (type) {
@@ -53,6 +54,6 @@ class PreferencesRepository(private val settings: SharedPreferences) {
         TYPE_CLOUDY -> GradientType.TYPE_CLOUDY
         TYPE_SNOW -> GradientType.TYPE_SNOW
         TYPE_THUNDER -> GradientType.TYPE_THUNDER
-        else -> GradientType.TYPE_CLEAR
+        else -> throw Exception(exception_msg)
     }
 }

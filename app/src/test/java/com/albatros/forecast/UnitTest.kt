@@ -1,7 +1,7 @@
 package com.albatros.forecast
 
-import com.albatros.forecast.domain.gradient.GradientType
-import com.albatros.forecast.domain.gradient.conditionToType
+import com.albatros.forecast.model.data.GradientType
+import com.albatros.forecast.domain.conditionToType
 import com.albatros.forecast.domain.isDaytimeDescription
 import com.albatros.forecast.domain.isDirection
 import com.albatros.forecast.domain.isWeatherDescription

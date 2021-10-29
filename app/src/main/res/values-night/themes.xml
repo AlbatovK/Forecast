@@ -60,4 +60,10 @@
         <item name="android:padding">8dp</item>
     </style>
 
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/snow_dark</item>
+        <item name="colorSwitchThumbNormal">@color/white</item>
+        <item name="android:colorForeground">@color/snow_dark</item>
+    </style>
+
 </resources>

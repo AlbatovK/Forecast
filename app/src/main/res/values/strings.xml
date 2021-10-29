@@ -24,4 +24,7 @@
     <string name="menu_hint_exit">Выйти</string>
     <string name="sunset_hint">Закат</string>
     <string name="sunrise_hint">Рассвет</string>
+    <string name="settings_change">Менять фоновый градиент</string>
+    <string name="settings_take">Выбрать стандартный градиент</string>
+    <string name="settings_title">Настройки</string>
 </resources>

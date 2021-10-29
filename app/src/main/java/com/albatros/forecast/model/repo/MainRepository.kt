@@ -16,8 +16,14 @@ class MainRepository(
     private val firebaseAnalytics: FirebaseAnalytics
 ) {
 
-    suspend fun getForecast(lang: String = "en_US", refresh: Boolean = false): ForecastMain {
-        delay(2_000)
+    suspend fun getForecast(lang: String = "en_US", refresh: Boolean = false, empty: Boolean = false): ForecastMain {
+        if (empty) {
+            Log.d("getForecast", "Returning empty forecast")
+            return ForecastMain().also {
+                _forecastLive.value = it
+            }
+        }
+        delay(2_000) /* Obviously foolish, yet practical since locationApi can't be constrained by coroutines */
         val (lat, lon) = locationRepository.getLastLocation()
         var collected = false
         if (_forecast == null || refresh) {
@@ -46,8 +52,8 @@ class MainRepository(
         }
         if (_forecast?.forecast?.parts?.isNotEmpty() == true && ForecastMain() != _forecast && !collected) {
             dbRepo.insertForecast(_forecast!!)
-            _forecastLive.value = _forecast!!
         }
+        _forecastLive.value = _forecast!!
         return _forecast!!
     }
 
