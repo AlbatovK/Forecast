@@ -3,7 +3,7 @@ name: CI Unit_tests
 on: [ pull_request, push ]
 
 jobs:
-
+  
   Unit-test:
     name: Run unit tests in master
     runs-on: ubuntu-latest
@@ -16,7 +16,7 @@ jobs:
         run: ./gradlew test
       - name: Build with Gradle
         run: ./gradlew build
-
+        
   build:
     name: Generate APK
     runs-on: ubuntu-latest
