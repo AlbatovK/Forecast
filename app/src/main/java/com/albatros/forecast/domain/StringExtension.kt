@@ -1,5 +1,7 @@
 package com.albatros.forecast.domain
 
+import com.albatros.forecast.model.data.GradientType
+
 private val stateMap = mapOf(
     "clear" to "Ясно",
     "partly-cloudy" to "Малооблачно",
@@ -41,6 +43,46 @@ private val daytimeMap = mapOf(
     "evening" to "Вечер",
 )
 
+val arrClear = arrayOf(
+    "clear",
+    "partly-cloudy"
+)
+
+val arrCloudy = arrayOf(
+    "cloudy",
+    "overcast",
+    "drizzle",
+    "light-rain",
+    "rain",
+    "moderate-rain",
+    "heavy-rain",
+    "continuous-heavy-rain",
+    "showers",
+)
+
+var arrSnow = arrayOf(
+    "wet-snow",
+    "light-snow",
+    "snow",
+    "snow-showers",
+)
+
+val arrThunder = arrayOf(
+    "hail",
+    "thunderstorm",
+    "thunderstorm-with-rain",
+    "thunderstorm-with-hail",
+)
+
+fun String.conditionToType(): GradientType {
+    return when (this) {
+        in arrClear -> GradientType.TYPE_CLEAR
+        in arrCloudy -> GradientType.TYPE_CLOUDY
+        in arrSnow -> GradientType.TYPE_SNOW
+        in arrThunder -> GradientType.TYPE_THUNDER
+        else -> GradientType.TYPE_CLEAR
+    }
+}
 
 fun String.isWeatherDescription() = stateMap.containsKey(this)
 

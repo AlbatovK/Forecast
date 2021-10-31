@@ -2,7 +2,9 @@ package com.albatros.forecast.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.util.Log
@@ -16,16 +18,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.work.*
 import com.albatros.forecast.R
 import com.albatros.forecast.databinding.ActivityPresentationBinding
 import com.albatros.forecast.databinding.DialogLayoutBinding
 import com.albatros.forecast.domain.getWeatherDescription
 import com.albatros.forecast.model.data.GradientType
-import com.albatros.forecast.domain.makeGradient
 import com.albatros.forecast.domain.isWeatherDescription
-import com.albatros.forecast.domain.link
 import com.albatros.forecast.domain.loadSvgInto
 import com.albatros.forecast.model.data.ForecastMain
+import com.albatros.forecast.model.worker.NotificationsWorker
 import com.albatros.forecast.ui.activity.viewmodel.PresentationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -40,14 +42,11 @@ class PresentationActivity : AppCompatActivity() {
     private val onDataLoadedObserver = Observer<ForecastMain> {
         Log.d("DataLoaded", "Activity")
         with(binding) {
-            val downloadLink = link.format(it.fact?.icon ?: "ovc")
+            val downloadLink = it.fact?.icon ?: "ovc"
             imgState.loadSvgInto(downloadLink)
             temp.text = getString(R.string.temp_data, it.fact?.temp ?: 0)
             val condition = it.fact?.condition ?: getString(R.string.unknown_condition)
             state.text = if (condition.isWeatherDescription()) condition.getWeatherDescription() else condition
-            temp.visibility = View.VISIBLE
-            imgState.visibility = View.VISIBLE
-            state.visibility = View.VISIBLE
         }
     }
 
@@ -95,8 +94,13 @@ class PresentationActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
         checkForPermissions()
+        setUpWorker()
         presentationViewModel.gradient.observe(this, onGradientChanged)
     }
+
+    private fun setUpWorker() =
+        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            NotificationsWorker.work_id, ExistingPeriodicWorkPolicy.REPLACE, presentationViewModel.getWorker())
 
     private fun checkForPermissions() {
         val permissions = listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -120,6 +124,24 @@ class PresentationActivity : AppCompatActivity() {
             presentationViewModel.forecast.observe(this, onDataLoadedObserver)
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun makeGradient(
+        type: GradientType,
+        res: Resources,
+        theme: Resources.Theme
+    ): GradientDrawable {
+        val colors: IntArray = when (type) {
+            GradientType.TYPE_CLEAR -> intArrayOf(res.getColor(R.color.sky_dark, theme), res.getColor(
+                R.color.sky_light, theme))
+            GradientType.TYPE_CLOUDY ->  intArrayOf(res.getColor(R.color.cloud_light, theme), res.getColor(
+                R.color.cloud_dark, theme))
+            GradientType.TYPE_SNOW -> intArrayOf(res.getColor(R.color.snow_light, theme), res.getColor(
+                R.color.snow_dark, theme))
+            GradientType.TYPE_THUNDER -> intArrayOf(res.getColor(R.color.thunder_light, theme), res.getColor(
+                R.color.thunder_dark, theme))
+        }
+        return GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

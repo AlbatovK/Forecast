@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Forecast</string>
     <string name="temp_data">%d С°</string>
-    <string name="unknown_condition">Неопределено</string>
+    <string name="unknown_condition">Undef</string>
     <string name="min_temp">Мин. темп.</string>
     <string name="max_temp">Макс. темп.</string>
     <string name="feels_like">Чувствуется как %s</string>

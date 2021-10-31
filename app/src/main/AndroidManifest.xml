@@ -5,6 +5,7 @@
 
     <!-- Required for API access -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Required for constraining workers -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Required for checking location -->
@@ -23,7 +24,6 @@
         android:theme="@style/Theme.Forecast"
         android:usesCleartextTraffic="true"
         tools:ignore="allowBackup">
-
         <activity
             android:name=".ui.activity.PresentationActivity"
             android:theme="@style/Theme.Forecast.NoActionBar"
@@ -33,6 +33,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 </manifest>

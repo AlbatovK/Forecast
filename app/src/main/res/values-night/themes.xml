@@ -38,7 +38,7 @@
         <item name="android:fontFamily">@font/navigo_medium</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/sky_font</item>
-        <item name="android:visibility">invisible</item>
+        <item name="android:visibility">visible</item>
     </style>
 
     <style name="hint_text_style">

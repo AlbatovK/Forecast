@@ -41,7 +41,7 @@ class FirstFragment : Fragment() {
                 windSpeedFact.text =
                     getString(R.string.wind_speed_fact, (it.fact?.windSpeed ?: 0).toString())
                 windDirFact.text =
-                    if (it.fact?.windDir?.isDirection() == true && it.fact?.windDir?.isNotEmpty() == true)
+                    if (it.fact?.windDir?.isDirection() == true)
                         it.fact?.windDir!!.getDirection()
                     else getString(R.string.unknown_condition)
                 humidityFact.text = (it.fact?.humidity ?: 0.0).toInt().toString()
@@ -49,14 +49,6 @@ class FirstFragment : Fragment() {
                     getString(R.string.pressure_mm_data, (it.fact?.pressureMm ?: 0.0).toInt())
                 sunsetFact.text = it.forecast?.sunset ?: getString(R.string.unknown_condition)
                 sunriseFact.text = it.forecast?.sunrise ?: getString(R.string.unknown_condition)
-                tempFact.visibility = View.VISIBLE
-                feelsLikeFact.visibility = View.VISIBLE
-                windSpeedFact.visibility = View.VISIBLE
-                windDirFact.visibility = View.VISIBLE
-                humidityFact.visibility = View.VISIBLE
-                pressureFact.visibility = View.VISIBLE
-                sunsetFact.visibility = View.VISIBLE
-                sunriseFact.visibility = View.VISIBLE
             }
             lifecycleScope.launch {
                 delay(500)

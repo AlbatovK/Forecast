@@ -1,11 +1,12 @@
 package com.albatros.forecast
 
-import android.content.Context
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.albatros.forecast.model.data.*
 import com.albatros.forecast.model.database.impl.ForecastDatabase
-import com.albatros.forecast.model.module.*
+import com.albatros.forecast.model.module.appModule
+import com.albatros.forecast.model.module.provideDatabase
+import com.albatros.forecast.model.module.repoModule
 import com.albatros.forecast.model.repo.DatabaseRepository
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
@@ -14,26 +15,27 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
+import org.koin.java.KoinJavaComponent.inject
 
 @RunWith(AndroidJUnit4::class)
 class DatabaseTest : TestCase() {
 
     private lateinit var forecastDb: ForecastDatabase
-    private lateinit var dbRepo: DatabaseRepository
     private lateinit var actualForecast: ForecastMain
+    private val modules = listOf(appModule, repoModule)
+
+    init {
+        loadKoinModules(modules)
+    }
+
+    private val dbRepo: DatabaseRepository by inject(DatabaseRepository::class.java)
 
     @Before
     public override fun setUp() = runBlocking(Dispatchers.IO) {
-        val context: Context = ApplicationProvider.getApplicationContext()
-        forecastDb = provideDatabase(context)
-        dbRepo = DatabaseRepository(
-            provideFactDao(forecastDb),
-            provideForecastDao(forecastDb),
-            provideForecastMainDao(forecastDb),
-            provideInfoDao(forecastDb),
-            providePartDao(forecastDb)
-        )
         actualForecast = dbRepo.collectForecastFromDatabase()
+        forecastDb = provideDatabase(InstrumentationRegistry.getInstrumentation().targetContext)
     }
 
     @Test(timeout = 300)
@@ -53,9 +55,7 @@ class DatabaseTest : TestCase() {
         try {
             dbRepo.clearDatabase()
             dbRepo.collectForecastFromDatabase()
-        } catch (e: Exception) {
-            fail()
-        }
+        } catch (e: Exception) { fail() }
     }
 
     @Test(timeout = 300)
@@ -70,5 +70,6 @@ class DatabaseTest : TestCase() {
     fun closeDatabase() = runBlocking(Dispatchers.IO) {
         dbRepo.insertForecast(actualForecast)
         forecastDb.close()
+        unloadKoinModules(modules)
     }
 }

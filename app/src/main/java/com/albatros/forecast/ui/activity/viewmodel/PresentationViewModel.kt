@@ -2,11 +2,13 @@ package com.albatros.forecast.ui.activity.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.*
+import androidx.work.*
 import com.albatros.forecast.domain.conditionToType
 import com.albatros.forecast.model.data.ForecastMain
 import com.albatros.forecast.model.data.GradientType
 import com.albatros.forecast.model.repo.MainRepository
 import com.albatros.forecast.model.repo.PreferencesRepository
+import com.albatros.forecast.model.worker.NotificationsWorker
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -63,6 +65,18 @@ class PresentationViewModel(
         forecast = _forecast
         forecast.observeForever(forecastObserver)
         Log.d("ViewModel", "Observing")
+    }
+
+    fun getWorker(): PeriodicWorkRequest {
+        val constraints = Constraints.Builder().let {
+            it.setRequiredNetworkType(NetworkType.CONNECTED)
+            it.build()
+        }
+        return PeriodicWorkRequest.Builder(NotificationsWorker::class.java, NotificationsWorker.interval_min,
+            NotificationsWorker.time_unit)
+            .setConstraints(constraints)
+            .setInitialDelay(NotificationsWorker.interval_min, NotificationsWorker.time_unit)
+            .build()
     }
 
     fun errorInit() {

@@ -73,7 +73,6 @@
                         android:paddingBottom="12dp"
                         android:textSize="44sp"
                         android:theme="@style/header_text_style"
-                        android:visibility="invisible"
                         app:layout_collapseMode="pin" />
 
                     <TextView
@@ -90,7 +89,6 @@
                         android:paddingEnd="20dp"
                         android:paddingBottom="24dp"
                         android:textSize="22sp"
-                        android:visibility="invisible"
                         app:layout_collapseMode="pin" />
 
                 </LinearLayout>

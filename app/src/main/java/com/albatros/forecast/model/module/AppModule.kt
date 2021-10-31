@@ -5,6 +5,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.albatros.forecast.model.api.Api
 import com.albatros.forecast.model.database.impl.ForecastDatabase
+import com.google.android.gms.location.LocationServices
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -59,20 +61,24 @@ private fun provideGson() =
 private fun provideSharedPreferences(context: Context) =
     context.getSharedPreferences(settingsName, Context.MODE_PRIVATE)
 
+private fun provideLocationClient(context: Context) =
+    LocationServices.getFusedLocationProviderClient(context)
+
+private fun provideFirebaseAnalytics(context: Context) =
+    FirebaseAnalytics.getInstance(context)
+
 val appModule = module {
     single { provideDatabase(androidContext()) }
-
     single { provideFactDao(get()) }
     single { provideForecastDao(get()) }
     single { provideInfoDao(get()) }
     single { provideForecastMainDao(get()) }
     single { providePartDao(get()) }
-
     single { provideApi(get()) }
     single { provideRetrofit(get()) }
-
     single { provideGsonFactory(get()) }
     single { provideGson() }
-
     single { provideSharedPreferences(androidContext()) }
+    single { provideLocationClient(androidContext()) }
+    single { provideFirebaseAnalytics(androidContext()) }
 }
