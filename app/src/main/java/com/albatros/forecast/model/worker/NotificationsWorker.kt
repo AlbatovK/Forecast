@@ -32,7 +32,7 @@ class NotificationsWorker(context: Context, params: WorkerParameters) : Coroutin
 
     companion object {
         var work_id = "fr_work"
-        var interval_min: Long = 15
+        var interval_min: Long = 120
         var time_unit = TimeUnit.MINUTES
         private const val TAG = "Worker"
     }
@@ -60,10 +60,12 @@ class NotificationsWorker(context: Context, params: WorkerParameters) : Coroutin
             NotificationCompat.Builder(applicationContext, chnId)
                 .setLargeIcon(bitmap)
                 .setContentText(header)
+                .setContentTitle("Прогноз на настоящее время")
                 .setSmallIcon(R.drawable.icon)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
-        return builder.build()
+
+        return builder.setChannelId(chnId).build()
     }
 
     private fun resetWork() {
@@ -105,16 +107,16 @@ class NotificationsWorker(context: Context, params: WorkerParameters) : Coroutin
                 ForecastMain()
             }
         }
-        delay(10_000)
+        delay(2_000)
         val header = (forecast.fact?.condition?.getWeatherDescription() ?: applicationContext.getString(R.string.unknown_condition))
             .plus(" | ${applicationContext.getString(R.string.temp_data,forecast.fact?.temp ?: 0)}")
         val bitmap = bitmapFromSvgAsync(forecast.fact?.icon ?: "ovc", applicationContext).await()
-        delay(10_000)
         createCurrentChannel()
         val notification = getNotification(header, bitmap)
         val info = ForegroundInfo(0, notification, Service.BIND_IMPORTANT)
-        setForegroundAsync(info)
-        notificationManager.notify(0, notification)
+
+        setForeground(info)
+        notificationManager.notify(1, notification)
         resetWork()
         unloadKoinModules(modules)
         val data = Data.Builder().apply {
