@@ -5,7 +5,6 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
-import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.util.Log
@@ -28,7 +27,8 @@ import org.koin.core.context.unloadKoinModules
 import org.koin.java.KoinJavaComponent.inject
 import java.util.concurrent.TimeUnit
 
-class NotificationsWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+class NotificationsWorker(context: Context, params: WorkerParameters)
+    : CoroutineWorker(context, params) {
 
     companion object {
         var work_id = "fr_work"
@@ -55,16 +55,15 @@ class NotificationsWorker(context: Context, params: WorkerParameters) : Coroutin
         try { channel?.let { notificationManager.createNotificationChannel(it) } } catch (ignored: Exception) { }
     }
 
-    private fun getNotification(header: String, bitmap: Bitmap): Notification {
+    private fun getNotification(header: String, content: String, bitmap: Bitmap): Notification {
         val builder: NotificationCompat.Builder =
             NotificationCompat.Builder(applicationContext, chnId)
                 .setLargeIcon(bitmap)
-                .setContentText(header)
-                .setContentTitle("Прогноз на настоящее время")
+                .setContentText(content)
+                .setContentTitle(header)
                 .setSmallIcon(R.drawable.icon)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
-
         return builder.setChannelId(chnId).build()
     }
 
@@ -108,13 +107,12 @@ class NotificationsWorker(context: Context, params: WorkerParameters) : Coroutin
             }
         }
         delay(2_000)
-        val header = (forecast.fact?.condition?.getWeatherDescription() ?: applicationContext.getString(R.string.unknown_condition))
-            .plus(" | ${applicationContext.getString(R.string.temp_data,forecast.fact?.temp ?: 0)}")
+        val content = (forecast.fact?.condition?.getWeatherDescription()?.replace("\n", "") ?: applicationContext.getString(R.string.unknown_condition))
+        val header = ("Прогноз | ${applicationContext.getString(R.string.temp_data,forecast.fact?.temp ?: 0)}")
         val bitmap = bitmapFromSvgAsync(forecast.fact?.icon ?: "ovc", applicationContext).await()
         createCurrentChannel()
-        val notification = getNotification(header, bitmap)
+        val notification = getNotification(header, content, bitmap)
         val info = ForegroundInfo(0, notification, Service.BIND_IMPORTANT)
-
         setForeground(info)
         notificationManager.notify(1, notification)
         resetWork()
