@@ -1,12 +1,14 @@
 package com.albatros.forecast.model.worker
 
 import android.Manifest
+import android.content.Context
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -21,6 +23,7 @@ import com.albatros.forecast.model.module.appModule
 import com.albatros.forecast.model.module.repoModule
 import com.albatros.forecast.model.repo.DatabaseRepository
 import com.albatros.forecast.model.repo.LocationRepository
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -48,6 +51,7 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
     private val api: Api by inject(Api::class.java)
     private val locRepo: LocationRepository by inject(LocationRepository::class.java)
     private val dbRepo: DatabaseRepository by inject(DatabaseRepository::class.java)
+    private val analytics: FirebaseAnalytics by inject(FirebaseAnalytics::class.java)
 
     private fun createCurrentChannel() {
         channel = NotificationChannel(chnId, chnName, NotificationManager.IMPORTANCE_HIGH)
@@ -98,6 +102,10 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
         Log.d(TAG, "doWork: passed permissions")
         delay(3_000)
         val (lat, lon) = locRepo.getLastLocation()
+        Bundle().apply {
+            putDoubleArray("location", doubleArrayOf(lat, lon))
+            analytics.logEvent("notification", this)
+        }
         val forecast = try { api.getForecast(lat, lon, "en_US") }
         catch (e1: Exception) {
             Log.d(TAG, "doWork: $e1")
@@ -108,7 +116,8 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
         }
         delay(2_000)
         val content = (forecast.fact?.condition?.getWeatherDescription()?.replace("\n", "") ?: applicationContext.getString(R.string.unknown_condition))
-        val header = ("Прогноз | ${applicationContext.getString(R.string.temp_data,forecast.fact?.temp ?: 0)}")
+        val tmp = applicationContext.getString(R.string.temp_data,forecast.fact?.temp ?: 0)
+        val header = applicationContext.getString(R.string.send_message, tmp)
         val bitmap = bitmapFromSvgAsync(forecast.fact?.icon ?: "ovc", applicationContext).await()
         createCurrentChannel()
         val notification = getNotification(header, content, bitmap)
