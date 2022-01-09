@@ -98,17 +98,18 @@ class PresentationActivity : AppCompatActivity() {
         presentationViewModel.gradient.observe(this, onGradientChanged)
     }
 
-    private fun setUpWorker() =
-        WorkManager.getInstance(this).enqueueUniquePeriodicWork(
-            NotificationsWorker.work_id, ExistingPeriodicWorkPolicy.REPLACE, presentationViewModel.getWorker())
+    private fun setUpWorker() {
+        if (presentationViewModel.isSendingEnabled())
+            WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+                NotificationsWorker.work_id, ExistingPeriodicWorkPolicy.REPLACE, presentationViewModel.getWorker())
+    }
 
     private fun checkForPermissions() {
         val permissions = listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         val denied = permissions.any {
             ActivityCompat.checkSelfPermission(this@PresentationActivity, it) != PackageManager.PERMISSION_GRANTED
         }
-        val reqCode = 1001
-        if (denied) requestPermissions(permissions.toTypedArray(), reqCode)
+        if (denied) requestPermissions(permissions.toTypedArray(), 1001)
         else {
             presentationViewModel.init()
             presentationViewModel.forecast.observe(this, onDataLoadedObserver)
@@ -116,7 +117,7 @@ class PresentationActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (grantResults.all { it == PackageManager.PERMISSION_GRANTED } ) {
+        if (grantResults.all { it == PackageManager.PERMISSION_GRANTED } && requestCode == 1001) {
             presentationViewModel.init()
             presentationViewModel.forecast.observe(this, onDataLoadedObserver)
         } else {
@@ -167,36 +168,47 @@ class PresentationActivity : AppCompatActivity() {
             create()
         }
         with(binding) {
-            grad1.background = makeGradient(GradientType.TYPE_CLEAR, resources, theme)
-            grad1.tag = GradientType.TYPE_CLEAR
-            grad2.background = makeGradient(GradientType.TYPE_CLOUDY, resources, theme)
-            grad2.tag = GradientType.TYPE_CLOUDY
-            grad3.background = makeGradient(GradientType.TYPE_SNOW, resources, theme)
-            grad3.tag = GradientType.TYPE_SNOW
-            grad4.background = makeGradient(GradientType.TYPE_THUNDER, resources, theme)
-            grad4.tag = GradientType.TYPE_THUNDER
-            var current = grad1
-            val onClick = View.OnClickListener { v ->
-                val img = v as ImageView
-                img.alpha = 0.7F
-                img.background
-                img.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_done, theme))
-                if (current != img)
-                    current.setImageResource(android.R.color.transparent)
-                current = img
-                if (!presentationViewModel.isChangingEnabled())
-                    presentationViewModel.setRegularGradient(v.tag as GradientType)
+            val gradMap = mapOf(
+                grad1 to GradientType.TYPE_CLEAR,
+                grad2 to GradientType.TYPE_CLOUDY,
+                grad3 to GradientType.TYPE_SNOW,
+                grad4 to GradientType.TYPE_THUNDER,
+            )
+            val gradList = listOf(grad1, grad2, grad3, grad4)
+            gradList.forEach {
+                it.background = makeGradient(gradMap[it]!!, resources, theme)
+                it.tag = gradMap[it]!!
             }
-            grad1.setOnClickListener(onClick)
-            grad2.setOnClickListener(onClick)
-            grad3.setOnClickListener(onClick)
-            grad4.setOnClickListener(onClick)
+            var current = gradList[0]
+            gradList.forEach {
+                it.setOnClickListener { v ->
+                    with(v as ImageView) {
+                        alpha = 0.7F
+                        setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_done, theme))
+                        if (current != this)
+                            current.setImageResource(android.R.color.transparent)
+                        current = this
+                    }
+                    if (presentationViewModel.isChangingDisabled())
+                        presentationViewModel.setRegularGradient(v.tag as GradientType)
+                }
+            }
             with(switchLayout) {
                 isChecked = presentationViewModel.isChangingEnabled()
                 setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked)
                         presentationViewModel.enableGradientChanging()
                     else presentationViewModel.disableGradientChanging()
+                }
+            }
+            with(sendSwitch) {
+                isChecked = presentationViewModel.isSendingEnabled()
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
+                        presentationViewModel.enableSending()
+                        setUpWorker()
+                    }
+                    else presentationViewModel.disableSending()
                 }
             }
         }

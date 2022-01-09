@@ -76,9 +76,65 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 app:track="@drawable/switch_track"
-                app:trackTintMode="screen" />
+                app:trackTintMode="screen"
+                tools:ignore="DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@color/black"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/ic_send"
+            tools:ignore="InefficientWeight" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="17sp"
+            android:autoSizeMinTextSize="16sp"
+            android:fontFamily="@font/navigo_regular"
+            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/do_send"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            tools:layout_editor_absoluteX="56dp"
+            tools:layout_editor_absoluteY="13dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/send_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:track="@drawable/switch_track"
+            app:trackTintMode="screen" />
+
+    </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -135,7 +191,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:paddingStart="8dp"
         android:paddingEnd="8dp">

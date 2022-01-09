@@ -38,9 +38,11 @@ class PresentationViewModel(
         }
     }
 
-    fun disableGradientChanging() = settings.putGradientMode(PreferencesRepository.MODE_NOT_CHANGE)
+    fun isSendingEnabled() = settings.isSendingEnabled()
 
-    fun enableGradientChanging() =  settings.putGradientMode(PreferencesRepository.MODE_CHANGE)
+    fun disableGradientChanging() = settings.disableGradientChanging()
+
+    fun enableGradientChanging() =  settings.enableGradientChanging()
 
     fun setRegularGradient(type: GradientType) {
         settings.putGradientType(type)
@@ -50,6 +52,8 @@ class PresentationViewModel(
     private fun getRegularGradient() = settings.getGradientType()
 
     fun isChangingEnabled() = settings.isChangingEnabled()
+
+    fun isChangingDisabled() = settings.isChangingDisabled()
 
     override fun onCleared() {
         _forecast.removeObserver(forecastObserver)
@@ -78,6 +82,10 @@ class PresentationViewModel(
             .setInitialDelay(NotificationsWorker.interval_min, NotificationsWorker.time_unit)
             .build()
     }
+
+    fun enableSending() = settings.enableSending()
+
+    fun disableSending() = settings.disableSending()
 
     fun errorInit() {
         _forecast = MutableLiveData<ForecastMain>().apply {

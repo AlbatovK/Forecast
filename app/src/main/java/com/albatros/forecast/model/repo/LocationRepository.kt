@@ -20,6 +20,9 @@ class LocationRepository(locationClient: FusedLocationProviderClient, context: C
     init {
         val permissions = listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         val granted = permissions.all { ActivityCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }
+        if (!granted) {
+            Log.d("Got coordinates", "Not granted")
+        }
         if (granted) {
             val callback = object: LocationCallback() { }
             locationClient.requestLocationUpdates(LocationRequest.create(), callback, Looper.getMainLooper())

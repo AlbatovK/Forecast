@@ -28,4 +28,5 @@
     <string name="settings_take">Выбрать стандартный градиент</string>
     <string name="settings_title">Настройки</string>
     <string name="send_message">Прогноз | %s</string>
+    <string name="do_send">Высылать уведомления</string>
 </resources>

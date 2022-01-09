@@ -23,6 +23,7 @@ import com.albatros.forecast.model.module.appModule
 import com.albatros.forecast.model.module.repoModule
 import com.albatros.forecast.model.repo.DatabaseRepository
 import com.albatros.forecast.model.repo.LocationRepository
+import com.albatros.forecast.model.repo.PreferencesRepository
 import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
@@ -35,7 +36,7 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
 
     companion object {
         var work_id = "fr_work"
-        var interval_min: Long = 120
+        var interval_min: Long = 150
         var time_unit = TimeUnit.MINUTES
         private const val TAG = "Worker"
     }
@@ -52,6 +53,7 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
     private val locRepo: LocationRepository by inject(LocationRepository::class.java)
     private val dbRepo: DatabaseRepository by inject(DatabaseRepository::class.java)
     private val analytics: FirebaseAnalytics by inject(FirebaseAnalytics::class.java)
+    private val config: PreferencesRepository by inject(PreferencesRepository::class.java)
 
     private fun createCurrentChannel() {
         channel = NotificationChannel(chnId, chnName, NotificationManager.IMPORTANCE_HIGH)
@@ -84,14 +86,20 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
             .enqueueUniquePeriodicWork(work_id, ExistingPeriodicWorkPolicy.REPLACE, request)
     }
 
-    private fun checkForPermissions(): Boolean {
+    private fun permissionsNotGranted(): Boolean {
         val permissions = listOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
         return permissions.any { ActivityCompat.checkSelfPermission(applicationContext, it) != PackageManager.PERMISSION_GRANTED }
     }
 
     override suspend fun doWork(): Result {
-        Log.d(TAG, "doWork: Started")
-        if (checkForPermissions()) {
+        if (config.isSendingDisabled()) {
+            val data = Data.Builder().apply {
+                putString("Result", "Failure")
+                putString("Reason", "Sending restricted")
+            }.build()
+            return Result.success(data)
+        }
+        if (permissionsNotGranted()) {
             unloadKoinModules(modules)
             val data = Data.Builder().apply {
                 putString("Result", "Failure")
@@ -99,12 +107,15 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
             }.build()
             return Result.success(data)
         }
-        Log.d(TAG, "doWork: passed permissions")
-        delay(3_000)
+        Log.d(TAG, "doWork: Started")
+        locRepo.getLastLocation()
+        delay(5_000)
         val (lat, lon) = locRepo.getLastLocation()
+        Log.d(TAG, "doWork: $lat, $lon")
         Bundle().apply {
-            putDoubleArray("location", doubleArrayOf(lat, lon))
-            analytics.logEvent("notification", this)
+            putDouble("lat", lat)
+            putDouble("lon", lon)
+            analytics.logEvent("Notification", this)
         }
         val forecast = try { api.getForecast(lat, lon, "en_US") }
         catch (e1: Exception) {
@@ -121,7 +132,7 @@ class NotificationsWorker(context: Context, params: WorkerParameters)
         val bitmap = bitmapFromSvgAsync(forecast.fact?.icon ?: "ovc", applicationContext).await()
         createCurrentChannel()
         val notification = getNotification(header, content, bitmap)
-        val info = ForegroundInfo(0, notification, Service.BIND_IMPORTANT)
+        val info = ForegroundInfo(1, notification, Service.BIND_IMPORTANT)
         setForeground(info)
         notificationManager.notify(1, notification)
         resetWork()
